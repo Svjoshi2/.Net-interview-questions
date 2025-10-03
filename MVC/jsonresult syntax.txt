@@ -1,0 +1,64 @@
+
+
+[HttpGet]
+public JsonResult GetAllUsers()
+{
+    Getalluser _getalluser = new Getalluser();
+
+    var users = _getalluser.Getallusers();
+
+    return Json(users, JsonRequestBehavior.AllowGet); // for MVC
+}
+
+--
+
+[HttpGet]
+public JsonResult GetAllUsers()
+{
+    Getalluser _getalluser = new Getalluser();
+
+    var users = _getalluser.Getallusers();
+
+    return new JsonResult(users);
+}
+
+-- with model in mvc
+
+public class UserViewModel
+{
+    public List<Getalluser> Listgetalluser { get; set; }
+}
+
+[HttpGet]
+public JsonResult GetAllUsers()
+{
+    Getalluser _getalluser = new Getalluser();
+
+    UserViewModel model = new UserViewModel();
+    model.Listgetalluser = _getalluser.Getallusers();
+
+    return Json(model, JsonRequestBehavior.AllowGet);
+}
+
+-- .net core
+
+[HttpGet]
+public JsonResult GetAllUsers()
+{
+    Getalluser _getalluser = new Getalluser();
+
+    var model = new UserViewModel
+    {
+        Listgetalluser = _getalluser.Getallusers()
+    };
+
+    return new JsonResult(model);
+}
+
+
+
+
+
+
+
+
