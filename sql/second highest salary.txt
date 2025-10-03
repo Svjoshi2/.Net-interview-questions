@@ -1,0 +1,19 @@
+
+
+;with gethighestSal AS 
+(
+select row_number() over (order by SALARY desc) as rn
+from employee
+
+)
+
+select * from gethighestSal where rn = 2
+
+
+__
+
+SELECT MAX(salary)
+FROM employee
+GROUP BY salary
+HAVING COUNT(*) > 1;
+
